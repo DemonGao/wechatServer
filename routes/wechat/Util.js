@@ -1,17 +1,29 @@
 /**
  * Created by demongao on 2017/2/14.
  */
-var fs = require('fs')
+var fs = require('fs')  //文件操作模块
 const express = require('express')
-var router = express.Router();
+var router = express.Router();  //Express 路由
+
+var mongoose = require('mongoose')
+var Token = mongoose.model('Token')
+
 const config = require('./../../config/default.json')   //配置文件
 const app_id      = config.wx.app_id;
 const app_secret  = config.wx.app_secret;
 const domain = config.domain;
+
 const API = require('wechat-api')           //微信公共平台Node库 API
 var api = new API(app_id, app_secret, getToken, saveToken );
 const OAuth = require('wechat-oauth');      //微信公共平台OAuth接口消息接口服务中间件与API SDK
-var client = new OAuth(app_id, app_secret); //微信授权和回调
+var client = new OAuth(app_id, app_secret,function (openid, callback) {
+    // 传入一个根据openid获取对应的全局token的方法
+    // 在getUser时会通过该方法来获取token
+    Token.getToken(openid, callback);
+}, function (openid, token, callback) {
+    // 持久化时请注意，每个openid都对应一个唯一的token!
+    Token.setToken(openid, token, callback);
+}); //微信授权和回调
 
 
 
@@ -148,3 +160,13 @@ function saveToken(token, callback){
 }
 
 //-------------------OAuth access_token -------------------
+function getOAuthToken(openid, callback){
+    // 传入一个根据openid获取对应的全局token的方法
+    // 在getUser时会通过该方法来获取token
+    Token.getToken(openid, callback);
+}
+
+function saveOAuthToken(openid, token, callback){
+    // 持久化时请注意，每个openid都对应一个唯一的token!
+    Token.setToken(openid, token, callback);
+}
