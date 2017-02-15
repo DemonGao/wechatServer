@@ -1,0 +1,59 @@
+{
+  "domain": "demongao94.tunnel.2bdata.com",
+  "is_debug": true,
+  "mongodb": "mongodb://wechat:demongao_wechat@123.207.169.191:11024/wechat",
+  "sms": {
+    "host": "127.0.0.1",
+    "port": "5001"
+  },
+  "wx": {
+    "app_id": "wxdca232ff0e9231cb",
+    "app_secret": "cdac160a6a57459438a9e3a712a7c82b",
+    "token" : "demongaosc",
+    "encodingAESKey": "V3y8t4GyCPmfbuP6RodhDG45SZ1lhyrR24hUyqNTetj",
+    "wx_menu": {
+      "button": [
+        {
+          "name": "菜单",
+          "sub_button": [
+            {
+              "type":"click",
+              "name":"今日歌曲",
+              "key":"menu"
+            }
+          ]
+        },
+        {
+          "name": "个人",
+          "sub_button": [
+            {
+              "type": "view",
+              "name": "我的博客",
+              "url": "http://demongao.com/"
+            },
+            {
+              "type": "view",
+              "name": "测试 OAuth",
+              "url": "http://demongao94.tunnel.2bdata.com/index"
+            }
+          ]
+        },
+        {
+          "name": "助理",
+          "sub_button": [
+            {
+              "type": "view",
+              "name": "大学",
+              "url": "http://demongao94.tunnel.2bdata.com/index"
+            },
+            {
+              "type": "view",
+              "name": "社区",
+              "url": "http://ip:port/all"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
